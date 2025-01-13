@@ -26,7 +26,5 @@ class WorldTime {
 
     // set the time property
     time = now.toString();
-
   }
-
 }
