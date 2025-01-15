@@ -22,6 +22,17 @@ class _ChooseLocationState extends State<ChooseLocation> {
     WorldTime(location: 'Jakarta', flag: 'indonesia.png', url: 'Asia%2FJakarta'),
   ];
 
+  void updateTime(index) async {
+    WorldTime instance = locations[index];
+    await instance.getTime();
+  //   navigate to home screen
+    Navigator.pop(context, {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+      'isDaytime': instance.isDaytime});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +55,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
             child: Card(
               child: ListTile(
                 onTap: () {
-                  print(locations[index].location);
+                  updateTime(index);
                 },
                 title: Text(locations[index].location),
                 leading: CircleAvatar(
