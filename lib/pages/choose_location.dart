@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../services/world_time.dart';
+
 class ChooseLocation extends StatefulWidget {
   const ChooseLocation({super.key});
 
@@ -8,6 +10,17 @@ class ChooseLocation extends StatefulWidget {
 }
 
 class _ChooseLocationState extends State<ChooseLocation> {
+
+  List<WorldTime> locations = [
+    WorldTime(location: 'London', flag: 'uk.png', url: 'Europe%2FLondon'),
+    WorldTime(location: 'Berlin', flag: 'germany.png', url: 'Europe%2FBerlin'),
+    WorldTime(location: 'Cairo', flag: 'egypt.png', url: 'Africa%2FCairo'),
+    WorldTime(location: 'Nairobi', flag: 'kenya.png', url: 'Africa%2FNairobi'),
+    WorldTime(location: 'Chicago', flag: 'usa.png', url: 'America%2FChicago'),
+    WorldTime(location: 'New York', flag: 'usa.png', url: 'America%2FNew_York'),
+    WorldTime(location: 'Seoul', flag: 'south_korea.png', url: 'Asia%2FSeoul'),
+    WorldTime(location: 'Jakarta', flag: 'indonesia.png', url: 'Asia%2FJakarta'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +35,25 @@ class _ChooseLocationState extends State<ChooseLocation> {
         ),
         centerTitle: true,
         elevation: 0,
+      ),
+      body: ListView.builder(
+        itemCount: locations.length,
+        itemBuilder: (context, index){
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
+            child: Card(
+              child: ListTile(
+                onTap: () {
+                  print(locations[index].location);
+                },
+                title: Text(locations[index].location),
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage('assets/${locations[index].flag}'),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
